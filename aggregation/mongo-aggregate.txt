@@ -1,0 +1,11 @@
+/**
+* Aim:Create aggregate for find out users by groupring _id which are from Mumbai address.
+* @objective : To understand use of aggregate method.
+* @aggregate():Aggregations operations process data records and return computed results. Aggregation operations group values from multiple documents together, and can perform a variety of operations on the grouped data to return a single result.
+*
+*/
+
+query:db.users.aggregate([{$match:{address:"mumbai"}},{$group:{_id:"$_id",count:{$sum:1}}}])
+output:{ "_id" : 3, "count" : 1 }
+       { "_id" : 1, "count" : 1 }
+=>Here two users belongs to mumbai city. 

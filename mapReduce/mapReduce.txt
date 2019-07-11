@@ -1,0 +1,28 @@
+/**
+* Aim:Create mapReduce function for find out users which are from Mumbai address.
+* @objective : To understand use of mapReduce function.
+* @mapReduce():Map-reduce is a data processing paradigm for condensing large volumes of data into useful aggregated results. For map-reduce operations, MongoDB provides the mapReduce database command.
+*
+*/
+
+query:-db.users.mapReduce(function() {emit(this._id,1);},function(key,values){return Array.sum(values)},{query:{address:"mumbai"},out:"mumbai_localists"});
+output:{
+	"result" : "mumbai_localists",//
+	"timeMillis" : 1186,
+	"counts" : {
+		"input" : 2,
+		"emit" : 2,
+		"reduce" : 0,
+		"output" : 2
+	},
+	"ok" : 1
+}
+=>Here we will create mumbai_localists mapReduce function.
+=>To see result of mapReduce function write following query.
+
+query:db.mumbai_localists.find().pretty()
+output:{ "_id" : 1, "value" : 1 }
+       { "_id" : 3, "value" : 1 }
+
+=>Here _id:1 and _id:3 belongs to mumbai address
+
